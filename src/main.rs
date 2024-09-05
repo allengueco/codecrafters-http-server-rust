@@ -1,3 +1,4 @@
+use std::io::Write;
 #[allow(unused_imports)]
 use std::net::TcpListener;
 
@@ -10,8 +11,8 @@ fn main() {
 
     for stream in listener.incoming() {
         match stream {
-            Ok(_stream) => {
-                write!(_stream, "HTTP/1.1 200 OK\r\n");
+            Ok(mut stream) => {
+                stream.write("HTTP/1.1 200 OK\r\n");
             }
             Err(e) => {
                 println!("error: {}", e);
