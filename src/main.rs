@@ -12,7 +12,9 @@ fn main() {
     for stream in listener.incoming() {
         match stream {
             Ok(mut stream) => {
-                stream.write(b"HTTP/1.1 200 OK\r\n");
+                stream
+                    .write(b"HTTP/1.1 200 OK\r\n\r\n")
+                    .expect("Unable to write");
             }
             Err(e) => {
                 println!("error: {}", e);
